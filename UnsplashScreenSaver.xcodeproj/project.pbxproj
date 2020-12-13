@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3763600A25844F1300E9CEC4 /* UnsplashScreenSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3763600925844F1300E9CEC4 /* UnsplashScreenSaverView.h */; };
-		3763600C25844F1300E9CEC4 /* UnsplashScreenSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3763600B25844F1300E9CEC4 /* UnsplashScreenSaverView.m */; };
+		375F08102584538A00EBB461 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 375F080F2584538A00EBB461 /* html */; };
+		3763601425844FC500E9CEC4 /* UnsplashScreenSaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763601325844FC500E9CEC4 /* UnsplashScreenSaverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		375F080F2584538A00EBB461 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = "<group>"; };
 		3763600625844F1300E9CEC4 /* UnsplashScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
-		3763600925844F1300E9CEC4 /* UnsplashScreenSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnsplashScreenSaverView.h; sourceTree = "<group>"; };
-		3763600B25844F1300E9CEC4 /* UnsplashScreenSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashScreenSaverView.m; sourceTree = "<group>"; };
 		3763600D25844F1300E9CEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3763601325844FC500E9CEC4 /* UnsplashScreenSaverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashScreenSaverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,9 +48,9 @@
 		3763600825844F1300E9CEC4 /* UnsplashScreenSaver */ = {
 			isa = PBXGroup;
 			children = (
-				3763600925844F1300E9CEC4 /* UnsplashScreenSaverView.h */,
-				3763600B25844F1300E9CEC4 /* UnsplashScreenSaverView.m */,
+				375F080F2584538A00EBB461 /* html */,
 				3763600D25844F1300E9CEC4 /* Info.plist */,
+				3763601325844FC500E9CEC4 /* UnsplashScreenSaverView.swift */,
 			);
 			path = UnsplashScreenSaver;
 			sourceTree = "<group>";
@@ -62,7 +62,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3763600A25844F1300E9CEC4 /* UnsplashScreenSaverView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +76,7 @@
 				3763600225844F1300E9CEC4 /* Sources */,
 				3763600325844F1300E9CEC4 /* Frameworks */,
 				3763600425844F1300E9CEC4 /* Resources */,
+				375F08132584551600EBB461 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -98,6 +98,7 @@
 				TargetAttributes = {
 					3763600525844F1300E9CEC4 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -124,17 +125,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375F08102584538A00EBB461 /* html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		375F08132584551600EBB461 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nopen -W \"${CODESIGNING_FOLDER_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3763600225844F1300E9CEC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3763600C25844F1300E9CEC4 /* UnsplashScreenSaverView.m in Sources */,
+				3763601425844FC500E9CEC4 /* UnsplashScreenSaverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,12 +275,21 @@
 		3763601125844F1300E9CEC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UnsplashScreenSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.kenta.UnsplashScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Debug;
@@ -266,12 +297,20 @@
 		3763601225844F1300E9CEC4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UnsplashScreenSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.kenta.UnsplashScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;

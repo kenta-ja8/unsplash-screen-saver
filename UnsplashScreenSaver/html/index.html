@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <title>UNSPLASH SCREEN SAVER</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        img {
+            position: absolute;
+            width: auto;
+            height: 100%;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        #contentMain {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* カーソル隠す */
+        .cursor-hide {
+            cursor: none !important;
+        }
+
+        /* Edgeにスクロールバーが出てしまう問題対応 */
+        html {
+            -ms-overflow-style: none;
+        }
+    </style>
+</head>
+
+<body style="margin: 0px; background: #0e0e0e;" class="vsc-initialized cursor-hide">
+    <div id="contentMain">
+        <img id="image1">
+        <img id="image2">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js"></script>
+    <script>
+        var url = 'https://source.unsplash.com/random';
+        var switchImgTime = 5 * 60 * 1000;
+        var fadeTime = 3 * 1000;
+        //カーソル一定時間後に非表示にする
+        $(function () {
+            setTimeout(function () {
+                $('body').addClass('cursor-hide');
+            }, 3000);
+        });
+        var resizeTimer = null;
+        $(function () {
+            $(window).on('load mousemove', function () {
+                clearTimeout(resizeTimer);
+                $('body').removeClass('cursor-hide');
+                resizeTimer = setTimeout(function () {
+                    $('body').addClass('cursor-hide');
+                }, 3000);
+            });
+        });
+
+        var img1 = document.getElementById("image1");
+        var img2 = document.getElementById("image2");
+        var nextImg = img2;
+        var util = {
+            getImage: function () {
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == xhr.DONE) {
+                        var file = new Blob([xhr.response], { type: 'image/jpeg' });
+                        var url = window.URL || window.webkitURL;
+                        if (nextImg == img1) {
+                            console.log("img1");
+                            nextImg = img2;
+                            $('#image1').transition({ opacity: 0, duration: fadeTime }, function () {
+                                $('#image1').css("display", "none");
+                                $('#image1').empty();
+                            }
+                            );
+                            $('#image2').css({ "display": "block", "opacity": "0" }).transition({ opacity: 1, duration: fadeTime });
+                        } else {
+                            console.log("img2");
+                            nextImg = img1;
+                            $('#image2').transition({ opacity: 0, duration: fadeTime }, function () {
+                                $('#image2').css("display", "none");
+                                $('#image2').empty();
+                            }
+                            );
+                            $('#image1').css({ "display": "block", "opacity": "0" }).transition({ opacity: 1, duration: fadeTime });
+                        }
+                        nextImg.src = url.createObjectURL(file);
+                    }
+                };
+                xhr.send();
+            }
+        }
+
+        console.log("start");
+        util.getImage();
+        setInterval(util.getImage, switchImgTime);
+    </script>
+</body>
+
+</html>
